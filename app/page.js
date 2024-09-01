@@ -1,25 +1,18 @@
-"use client"
 import Image from "next/image";
 import Link from "next/link";
 export default function Home() {
-const toggelScreen = () => {
-
-}
   return (
-    <main className="min-h-[80vh] text-white">
-      <div class="fixed left-0 top-0 -z-10 h-full w-full">
-        <div class="absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
-      </div>
+    <main>
       <div id="home" className="relative hero flex flex-col gap-10 text-white justify-center border-b border-zinc-500 items-center h-[85vh]">
-        <div className="text-3xl sm:text-6xl flex ">
+        <div className=" text-4xl sm:text-6xl flex ">
           <span>
             <h1>
-              <span className="text-5xl sm:text-8xl bg-gradient-to-br from-green-400 to-blue-600 bg-clip-text text-transparent ">
+              <span className="text-6xl sm:text-8xl bg-gradient-to-br from-green-400 to-blue-600 bg-clip-text text-transparent ">
                 S
               </span>
               hare a{" "}
               <span
-                className="text-4xl sm:text-7xl border-b border-transparent"
+                className="text-5xl sm:text-7xl border-b border-transparent"
                 style={{
                   borderImage: "linear-gradient(to right, #38bdf8, #34d399) 1",
                 }}
@@ -39,8 +32,8 @@ const toggelScreen = () => {
              <Image
               className="sm:hidden"
               src="/favicon.ico"
-              width={50}
-              height={50}
+              width={60}
+              height={60}
               alt="logo-icon"
             />
           </span>
@@ -50,9 +43,9 @@ const toggelScreen = () => {
           a Contribution Towards Their Dreams
         </div>
         <div className="flex gap-10">
-          <button className="bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center -">
+        <Link href="/login"><button className="bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center -">
             Start Here
-          </button>
+          </button></Link>
           <button className="bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center -">
            <Link href='#about-us'> Read More</Link>
           </button>
