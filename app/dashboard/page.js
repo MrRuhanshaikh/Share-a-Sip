@@ -17,7 +17,7 @@ const Dashboard = () => {
     } else {
       getData();
     }
-  }, [session, router]);
+  }, [session, router, getData]);
 
   const getData = async () => {
     let user = await fetchuser(session.user.name);
