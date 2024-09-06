@@ -17,7 +17,7 @@ const Dashboard = () => {
     } else {
       getData();
     }
-  }, [session, router, getData]);
+  }, [session, router]);
 
   const getData = async () => {
     let user = await fetchuser(session.user.name);
@@ -68,7 +68,7 @@ const Dashboard = () => {
     }
   };
 
-  return (
+   return (
     <>
       <div className="mt-16">
         <div className="text-2xl my-5 font-bold ">Complete Your Profile...</div>

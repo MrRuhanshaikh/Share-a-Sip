@@ -14,7 +14,7 @@ const Login = () => {
     }
   }, [session, router]);
 
-  return (
+ return (
     <>
       <div className="flex flex-col justify-center items-center mx-3 my-6 gap-10 mt-16">
         <div className ="text-xl Font-bold sm:text-3xl">
