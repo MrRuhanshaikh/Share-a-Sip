@@ -53,12 +53,12 @@ const Paymentpage = ({ Username }) => {
             progress: undefined,
             theme: "dark",
             toastId: toastId, // Set the unique ID
-          },[]);
+          });
         }
       }
     }
     getdata();
-  });
+  },[]);
 
   const getdata = async () => {
     let u = await fetchuser(Username);
