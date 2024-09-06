@@ -25,7 +25,8 @@ const Paymentpage = ({ Username }) => {
   useEffect(() => {
     if (!session) {
       router.push("/login");
-    } 
+    }
+    getdata(); 
     if (searchparams.get("paymentdone") == "true") {
       if (!toast.isActive(toastId)) {
         // Update profile and handle errors
@@ -57,7 +58,6 @@ const Paymentpage = ({ Username }) => {
         }
       }
     }
-    getdata();
   },[]);
 
   const getdata = async () => {
