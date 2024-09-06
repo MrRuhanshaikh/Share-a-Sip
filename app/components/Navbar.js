@@ -7,7 +7,7 @@ const Navbar = () => {
   const { data: session } = useSession();
   const [dropdown, setdropdown] = useState(false);
   return (
-    <nav className="absolute top-0 w-full ">
+    <nav className="absolute top-0 w-full z-20 ">
       <ul className="px-6 py-3 relative text-white backdrop-blur-md opacity-80 flex justify-between items-center">
         <div className="logo flex items-center sm:text-xl font-bold">
           <span>
@@ -52,9 +52,11 @@ const Navbar = () => {
               onClick={() => {
                 setdropdown(!dropdown);
               }}
-              onBlur={()=>{setTimeout(() => {
-                setdropdown(false);
-              }, 1000);}}
+              onBlur={() => {
+                setTimeout(() => {
+                  setdropdown(false);
+                }, 1000);
+              }}
               id="dropdownHoverButton"
               data-dropdown-toggle="dropdownHover"
               data-dropdown-trigger="hover"
@@ -62,8 +64,18 @@ const Navbar = () => {
               ty  bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 text-center inline-flex items-center"
               pe="button"
             >
-              <span className="hidden sm:block">Welcome, {session.user.name}! 🫡</span>
-              <span className="sm:hidden block">🫡{session.user.name.split(" ").map((word) => word[0]).join(" ")}</span>
+              <span className="hidden sm:block">
+                Welcome, {session.user.name}! 🫡
+              </span>
+              <span className="sm:hidden block">
+                🫡
+                {session && session.user && session.user.name
+                  ? session.user.name
+                      .split(" ")
+                      .map((word) => word[0])
+                      .join(" ")
+                  : ""}
+              </span>
               <svg
                 className="w-2.5 h-2.5 ms-3"
                 aria-hidden="true"
@@ -80,12 +92,12 @@ const Navbar = () => {
                 />
               </svg>
             </button>
-            
+
             <div
               id="dropdownHover"
-              className={`z-10 ${
+              className={`z-20 ${
                 dropdown ? "" : "hidden"
-              } absolute right-8 top-16 w-52 bg-white divide-y divide-gray-200 rounded-lg shadow-md border border-gray-200 `}
+              } absolute right-6 top-14 sm:w-52 bg-white divide-y divide-gray-200 rounded-lg shadow-md border border-gray-200 `}
             >
               <ul
                 className="py-2 text-sm text-gray-700"
@@ -100,8 +112,21 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <span onClick={()=>{signOut()}}className="cursor-pointer block px-4 py-2 hover:bg-gray-100">
-                   Logout
+                  <Link
+                    href={`/${session.user.name.replaceAll(" ","-")}`}
+                    className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Your Page
+                  </Link>
+                </li>
+                <li>
+                  <span
+                    onClick={() => {
+                      signOut();
+                    }}
+                    className="cursor-pointer block px-4 py-2 hover:bg-gray-100"
+                  >
+                    Logout
                   </span>
                 </li>
               </ul>

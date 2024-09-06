@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import Paymentpage from "../components/Paymentpage";
+import Payment from "../models/Payment";
 
-const Username = ({params}) => {
+const Username = ({ params }) => {  
   return (
-    <div>{params.Username}</div>
-  )
-}
+    <>
+      <Paymentpage Username={params.Username}/>
+    </>
+  );
+};
 
-export default Username
+export default Username;

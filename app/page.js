@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main>
-      <div id="home" className="relative hero flex flex-col gap-10 text-white justify-center border-b border-zinc-500 items-center h-[85vh]">
+      <div id="home" className="relative hero flex flex-col gap-10 text-white justify-center border-b border-zinc-500 items-center h-[90vh]">
         <div className=" text-4xl sm:text-6xl flex ">
           <span>
             <h1>

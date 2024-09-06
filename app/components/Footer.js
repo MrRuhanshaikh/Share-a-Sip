@@ -18,7 +18,7 @@ const Footer = () => {
           Sip&nbsp;
         </span> || All rights reserved || Created with ❤️ By 
         <Link className='font-bold' href='https://github.com/MrRuhanshaikh'>
-          Ruhan Shaikh
+        &nbsp;Ruhan Shaikh
         </Link>
       </div>
     </footer>
