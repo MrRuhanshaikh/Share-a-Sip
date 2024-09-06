@@ -58,7 +58,7 @@ const Paymentpage = ({ Username }) => {
       }
     }
     getdata();
-  }, []);
+  }, [Username, getdata, router, searchparams, session, toastId]);// changes for deployment
 
   const getdata = async () => {
     let u = await fetchuser(Username);
@@ -177,7 +177,7 @@ const Paymentpage = ({ Username }) => {
                     ></lord-icon>
                     <span>
                       {item.name} donated <b>₹{item.amount}</b> with the message
-                      "{item.message}"
+                      &quot;{item.message}&quot;
                     </span>
                   </li>
                 ))}

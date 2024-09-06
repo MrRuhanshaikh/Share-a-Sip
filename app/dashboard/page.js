@@ -18,7 +18,7 @@ const Dashboard = () => {
     } else {
       getData();
     }
-  }, [router, session]);
+  }, [Username, getdata, router, searchparams, session, toastId]);// changes for deployment 
 
   const getData = async () => {
     let user = await fetchuser(session.user.name);

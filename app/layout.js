@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Script from 'next/script';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -34,7 +35,7 @@ export default function RootLayout({ children }) {
           </div>
         </Sessionwrapper>
         <ToastContainer/>
-      <script src="https://cdn.lordicon.com/lordicon.js"></script>
+      <Script src="https://cdn.lordicon.com/lordicon.js"></Script>
       </body>
     </html>
   );
