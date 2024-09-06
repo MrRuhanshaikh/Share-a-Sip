@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Script from "next/script";
 import { fetchuser, fetchpayments, initiate } from "../actions/useractions";
 import Image from "next/image";
@@ -18,17 +18,26 @@ const Paymentpage = ({ Username }) => {
   const searchparams = useSearchParams();
   const toastId = uuidv4();
   const router = useRouter();
+
   const handlechange = (e) => {
     setpaymentform({ ...paymentform, [e.target.name]: e.target.value });
   };
 
+  // useCallback to memoize the function
+  const getdata = useCallback(async () => {
+    let u = await fetchuser(Username);
+    setcurrentUser(u);
+    let p = await fetchpayments(Username);
+    setpayments(p);
+  }, [Username]);
+
   useEffect(() => {
     if (!session) {
       router.push("/login");
-    } 
-    if (searchparams.get("paymentdone") == "true") {
+    }
+
+    if (searchparams.get("paymentdone") === "true") {
       if (!toast.isActive(toastId)) {
-        // Update profile and handle errors
         try {
           toast.success("Payment Successfully!", {
             position: "top-right",
@@ -39,7 +48,7 @@ const Paymentpage = ({ Username }) => {
             draggable: true,
             progress: undefined,
             theme: "dark",
-            toastId: toastId, // Set the unique ID
+            toastId: toastId,
           });
           router.push(`/${Username}`);
         } catch (error) {
@@ -52,20 +61,15 @@ const Paymentpage = ({ Username }) => {
             draggable: true,
             progress: undefined,
             theme: "dark",
-            toastId: toastId, // Set the unique ID
+            toastId: toastId,
           });
         }
       }
     }
-    getdata();
-  }, [Username, getdata, router, searchparams, session, toastId]);// changes for deployment
 
-  const getdata = async () => {
-    let u = await fetchuser(Username);
-    setcurrentUser(u);
-    let p = await fetchpayments(Username);
-    setpayments(p);
-  };
+    getdata(); // Call the getdata function from useCallback
+
+  }, [Username, getdata, router, searchparams, session, toastId]); // Correct dependency array
 
   const pay = async (amount) => {
     let a = await initiate(amount, session?.user.name, paymentform);
@@ -98,32 +102,25 @@ const Paymentpage = ({ Username }) => {
 
   const validateForm = () => {
     const { name, message, amount } = paymentform;
-  
-    // Ensure the fields exist and are strings
+
     const trimmedName = typeof name === "string" ? name.trim() : "";
     const trimmedMessage = typeof message === "string" ? message.trim() : "";
-  
-    // Regular expression for checking only alphabetic characters and spaces
+
     const nameRegex = /^[A-Za-z\s]+$/;
     const messageRegex = /^[A-Za-z\s]+$/;
-  
-    // Check all fields are filled after trimming
+
     if (!trimmedName || !trimmedMessage || !amount) return false;
-  
-    // Check name and message are strings with valid lengths and only alphabetic characters
     if (trimmedName.length <= 2 || !nameRegex.test(trimmedName)) return false;
     if (trimmedMessage.length <= 4 || !messageRegex.test(trimmedMessage)) return false;
-  
-    // Check amount is a valid number greater than 0
     if (isNaN(amount) || parseInt(amount) <= 0) return false;
-  
+
     return true;
   };
+
   const isPayButtonDisabled = () => !validateForm();
 
-   // Calculate total contributors and total amount
-   const totalContributors = payments.length;
-   const totalAmount = payments.reduce((sum, payment) => sum + payment.amount, 0);
+  const totalContributors = payments.length;
+  const totalAmount = payments.reduce((sum, payment) => sum + payment.amount, 0);
 
   return (
     <>
@@ -153,7 +150,7 @@ const Paymentpage = ({ Username }) => {
         </div>
 
         <div className="text-sm mb-4">
-        {currentUser?.bio || "Creating Awesome Content For Community"}
+          {currentUser?.bio || "Creating Awesome Content For Community"}
         </div>
         <div className="flex gap-2.5">
           <div className="text-sm mb-2">{totalContributors} Contributor</div>
