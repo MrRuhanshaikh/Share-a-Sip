@@ -16,10 +16,10 @@ const Footer = () => {
           }}
         >
           Sip&nbsp;
-        </span> || All rights reserved || Created with ❤️ By 
-        <Link className='font-bold' href='https://github.com/MrRuhanshaikh'>
+        </span> || All rights reserved || Created with ❤️ By Grp 13
+        {/* <Link className='font-bold' href='https://github.com/MrRuhanshaikh'>
         &nbsp;Ruhan Shaikh
-        </Link>
+        </Link> */}
       </div>
     </footer>
   );
